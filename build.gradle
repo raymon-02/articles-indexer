@@ -30,10 +30,12 @@ dependencyManagement {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
     compile "org.springframework.boot:spring-boot-starter-jetty"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin"
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
