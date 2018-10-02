@@ -1,0 +1,4 @@
+elasticsearch:
+  clusterName: elasticsearch_iorlov
+  host: localhost
+  port: 9300

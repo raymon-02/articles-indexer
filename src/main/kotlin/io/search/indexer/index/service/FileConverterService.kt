@@ -1,9 +1,8 @@
 package io.search.indexer.index.service
 
-import io.search.indexer.index.model.SingleDoc
-import io.search.indexer.index.model.SingleDocField
-import io.search.indexer.index.model.SingleDocField.BODY
-import io.search.indexer.index.model.SingleDocField.ID
+import io.search.indexer.index.model.Article
+import io.search.indexer.index.model.ArticleField
+import io.search.indexer.index.model.ArticleField.*
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 import java.io.File
@@ -13,7 +12,7 @@ import java.io.File
 class FileConverterService {
 
     //TODO: fields can be written not only in one line
-    fun convertFileToDocs(path: String): List<SingleDoc> {
+    fun convertFileToDocs(path: String): List<Article> {
         return File(path).walkTopDown().asSequence()
                 .filter {
                     it.isFile && it.extension == "index"
@@ -27,7 +26,7 @@ class FileConverterService {
                 .toList()
     }
 
-    private fun List<String>.toSingleDoc(): SingleDoc {
+    private fun List<String>.toSingleDoc(): Article {
         return map { it.trim().split(":", limit = 2) }
                 .asSequence()
                 .filter {
@@ -41,19 +40,28 @@ class FileConverterService {
                 .toSingleDoc()
     }
 
-    private fun Map<SingleDocField, String>.toSingleDoc(): SingleDoc {
-        return SingleDoc(
+    private fun Map<ArticleField, String>.toSingleDoc(): Article {
+        return Article(
                 get(ID),
-                get(BODY)
+                get(TITLE),
+                get(CONTENT),
+                get(TAGS).toList()
         )
     }
 
-    private fun Pair<String, String>.toSingleDocFieldPair(): Pair<SingleDocField, String>? {
+    private fun Pair<String, String>.toSingleDocFieldPair(): Pair<ArticleField, String>? {
         try {
-            return SingleDocField.valueOf(first) to second
+            return ArticleField.valueOf(first) to second
         } catch (ex: IllegalArgumentException) {
             return null
         }
+    }
+
+    private fun String?.toList(): List<String> {
+        return this?.trim()
+                ?.split(",")
+                ?.map { it.trim() }
+                ?: emptyList()
     }
 }
 
