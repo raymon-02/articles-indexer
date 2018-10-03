@@ -27,9 +27,6 @@ class IndexerConfiguration(
         val esSettings = Settings.builder()
                 .put("cluster.name", esClusterName)
                 .build()
-//        val transportClient = TransportClient.builder()
-//                .settings(esSettings)
-//                .build()
         val transportClient = PreBuiltTransportClient(esSettings)
         transportClient.addTransportAddress(
                 InetSocketTransportAddress(InetAddress.getByName(esHost), esPort)
