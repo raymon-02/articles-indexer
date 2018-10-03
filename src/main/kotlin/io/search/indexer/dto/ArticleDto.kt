@@ -1,4 +1,4 @@
-package io.search.indexer.index.dto
+package io.search.indexer.dto
 
 data class ArticleDto(
         val title: String,

@@ -1,4 +1,4 @@
-package io.search.indexer.index.config
+package io.search.indexer.config
 
 import org.elasticsearch.client.Client
 import org.elasticsearch.common.settings.Settings

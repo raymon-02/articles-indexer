@@ -1,8 +1,8 @@
 package io.search.indexer.index.service
 
-import io.search.indexer.index.model.Article
-import io.search.indexer.index.model.ArticleField
-import io.search.indexer.index.model.ArticleField.*
+import io.search.indexer.model.Article
+import io.search.indexer.model.ArticleField
+import io.search.indexer.model.ArticleField.*
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 import java.io.File

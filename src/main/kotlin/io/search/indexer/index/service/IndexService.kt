@@ -1,8 +1,8 @@
 package io.search.indexer.index.service
 
-import io.search.indexer.index.entity.ArticleEntity
-import io.search.indexer.index.model.Article
-import io.search.indexer.index.repository.ArticleRepository
+import io.search.indexer.entity.ArticleEntity
+import io.search.indexer.model.Article
+import io.search.indexer.repository.ArticleRepository
 import org.springframework.stereotype.Component
 
 @Component
