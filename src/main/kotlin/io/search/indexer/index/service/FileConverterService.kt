@@ -21,26 +21,26 @@ class FileConverterService {
                     it.readLines()
                 }
                 .map {
-                    it.toSingleDoc()
+                    it.toArticle()
                 }
                 .toList()
     }
 
-    private fun List<String>.toSingleDoc(): Article {
+    private fun List<String>.toArticle(): Article {
         return map { it.trim().split(":", limit = 2) }
                 .asSequence()
                 .filter {
                     it.size == 2
                 }
                 .map {
-                    (it[0].trim() to it[1].trim()).toSingleDocFieldPair()
+                    (it[0].trim() to it[1].trim()).toArticleFieldPair()
                 }
                 .filterNotNull()
                 .toMap()
-                .toSingleDoc()
+                .toArticle()
     }
 
-    private fun Map<ArticleField, String>.toSingleDoc(): Article {
+    private fun Map<ArticleField, String>.toArticle(): Article {
         return Article(
                 get(ID),
                 get(TITLE),
@@ -49,7 +49,7 @@ class FileConverterService {
         )
     }
 
-    private fun Pair<String, String>.toSingleDocFieldPair(): Pair<ArticleField, String>? {
+    private fun Pair<String, String>.toArticleFieldPair(): Pair<ArticleField, String>? {
         try {
             return ArticleField.valueOf(first) to second
         } catch (ex: IllegalArgumentException) {
