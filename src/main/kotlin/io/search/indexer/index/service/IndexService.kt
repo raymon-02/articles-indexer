@@ -29,12 +29,7 @@ class IndexService(
 
     private fun List<Article>.toArticleEntityList(): List<ArticleEntity> {
         return map {
-            ArticleEntity(
-                    id = it.id,
-                    title = it.title,
-                    content = it.content,
-                    tags = it.tags
-            )
+            ArticleEntity(it.id, it.title, it.content, it.tags)
         }
     }
 
