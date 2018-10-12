@@ -1,6 +1,7 @@
 package io.search.indexer.search.controller
 
-import io.search.indexer.dto.ArticleDto
+import io.search.indexer.dto.ArticleIdTitleDto
+import io.search.indexer.model.Article
 import io.search.indexer.search.service.SearchService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,11 +17,16 @@ class SearchController(
 
     @GetMapping
     fun search(
-            @RequestParam("q", required = true) query: String
-    ): List<ArticleDto> {
+            @RequestParam("q", required = true) searchString: String
+    ): List<ArticleIdTitleDto> {
+        return searchService.searchByString(searchString)
+                .toArticleIdTitleDtoList()
+    }
 
-//        TODO()
-        return emptyList()
+    private fun List<Article>.toArticleIdTitleDtoList(): List<ArticleIdTitleDto> {
+        return map {
+            ArticleIdTitleDto(it.id, it.title)
+        }
     }
 
 }

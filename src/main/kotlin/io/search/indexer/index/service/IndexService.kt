@@ -10,20 +10,20 @@ class IndexService(
         private val articleRepository: ArticleRepository,
         private val fileConverterService: FileConverterService
 ) {
-    fun indexArticles(articles: List<Article>): List<Pair<String?, String?>> {
+    fun indexArticles(articles: List<Article>): List<Article> {
         return saveArticles(articles)
     }
 
-    fun indexArticlesFromPath(path: String): List<Pair<String?, String?>> {
+    fun indexArticlesFromPath(path: String): List<Article> {
         val articles = fileConverterService.convertFileToDocs(path)
         return saveArticles(articles)
     }
 
-    private fun saveArticles(articles: List<Article>): List<Pair<String?, String?>> {
+    private fun saveArticles(articles: List<Article>): List<Article> {
         val savedArticles = articleRepository.saveAll(articles.toArticleEntityList())
         return savedArticles.filterNotNull()
                 .map {
-                    Pair(it.id, it.title)
+                    Article(it.id, it.title, it.content, it.tags)
                 }
     }
 
