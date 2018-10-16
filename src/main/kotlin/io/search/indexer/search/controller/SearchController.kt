@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 
+//TODO: support async calls
+
 @RestController
 @RequestMapping("/api/search")
 class SearchController(
