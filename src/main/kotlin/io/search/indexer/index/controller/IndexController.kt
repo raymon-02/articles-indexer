@@ -34,7 +34,18 @@ class IndexController(
 
     private fun List<ArticleDto>.toArticleList(): List<Article> {
         return map {
-            Article(it.id, it.title, it.content, it.tags)
+            Article(
+                    it.id,
+                    it.title,
+                    it.place,
+                    it.year,
+                    it.material,
+                    it.creator,
+                    it.address,
+                    it.description,
+                    it.massMediaName,
+                    it.massMediaTexts
+            )
         }
     }
 

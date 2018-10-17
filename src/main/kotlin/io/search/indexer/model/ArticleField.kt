@@ -3,6 +3,12 @@ package io.search.indexer.model
 enum class ArticleField {
     ID,
     TITLE,
-    CONTENT,
-    TAGS
+    PLACE,
+    YEAR,
+    MATERIAL,
+    CREATOR,
+    ADDRESS,
+    DESCRIPTION,
+    MM_NAME,
+    MM_TEXTS
 }

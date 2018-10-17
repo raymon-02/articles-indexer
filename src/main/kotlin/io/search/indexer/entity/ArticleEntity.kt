@@ -3,6 +3,7 @@ package io.search.indexer.entity
 import org.springframework.data.annotation.Id
 import org.springframework.data.elasticsearch.annotations.Document
 import org.springframework.data.elasticsearch.annotations.Field
+import org.springframework.data.elasticsearch.annotations.FieldType.Integer
 import org.springframework.data.elasticsearch.annotations.FieldType.Text
 
 @Document(
@@ -26,12 +27,54 @@ data class ArticleEntity(
                 analyzer = "russian",
                 searchAnalyzer = "russian"
         )
-        val content: String? = null,
+        val place: String? = null,
+
+        @Field(
+                type = Integer,
+                analyzer = "russian",
+                searchAnalyzer = "russian"
+        )
+        val year: Int? = null,
 
         @Field(
                 type = Text,
                 analyzer = "russian",
                 searchAnalyzer = "russian"
         )
-        val tags: List<String> = emptyList()
+        val material: String? = null,
+
+        @Field(
+                type = Text,
+                analyzer = "russian",
+                searchAnalyzer = "russian"
+        )
+        val creator: String? = null,
+
+        @Field(
+                type = Text,
+                analyzer = "russian",
+                searchAnalyzer = "russian"
+        )
+        val address: String? = null,
+
+        @Field(
+                type = Text,
+                analyzer = "russian",
+                searchAnalyzer = "russian"
+        )
+        val description: String? = null,
+
+        @Field(
+                type = Text,
+                analyzer = "russian",
+                searchAnalyzer = "russian"
+        )
+        val massMediaName: String? = null,
+
+        @Field(
+                type = Text,
+                analyzer = "russian",
+                searchAnalyzer = "russian"
+        )
+        val massMediaTexts: List<String> = emptyList()
 )

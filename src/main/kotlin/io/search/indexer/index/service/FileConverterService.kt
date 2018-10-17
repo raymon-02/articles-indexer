@@ -44,8 +44,14 @@ class FileConverterService {
         return Article(
                 get(ID),
                 get(TITLE),
-                get(CONTENT),
-                get(TAGS).toList()
+                get(PLACE),
+                get(YEAR)?.toInt(),
+                get(MATERIAL),
+                get(CREATOR),
+                get(ADDRESS),
+                get(DESCRIPTION),
+                get(MM_NAME),
+                get(MM_TEXTS).toList()
         )
     }
 

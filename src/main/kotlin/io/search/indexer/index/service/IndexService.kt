@@ -23,13 +23,35 @@ class IndexService(
         val savedArticles = articleRepository.saveAll(articles.toArticleEntityList())
         return savedArticles.filterNotNull()
                 .map {
-                    Article(it.id, it.title, it.content, it.tags)
+                    Article(
+                            it.id,
+                            it.title,
+                            it.place,
+                            it.year,
+                            it.material,
+                            it.creator,
+                            it.address,
+                            it.description,
+                            it.massMediaName,
+                            it.massMediaTexts
+                    )
                 }
     }
 
     private fun List<Article>.toArticleEntityList(): List<ArticleEntity> {
         return map {
-            ArticleEntity(it.id, it.title, it.content, it.tags)
+            ArticleEntity(
+                    it.id,
+                    it.title,
+                    it.place,
+                    it.year,
+                    it.material,
+                    it.creator,
+                    it.address,
+                    it.description,
+                    it.massMediaName,
+                    it.massMediaTexts
+            )
         }
     }
 
