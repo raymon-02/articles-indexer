@@ -19,9 +19,9 @@ class SearchController(
 
     @GetMapping
     fun search(
-            @RequestParam("q", required = true) searchString: String
+            @RequestParam("q", required = true) text: String
     ): List<ArticleIdTitleDto> {
-        return searchService.searchByString(searchString)
+        return searchService.searchByText(text)
                 .toArticleIdTitleDtoList()
     }
 

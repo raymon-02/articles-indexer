@@ -65,7 +65,7 @@ class FileConverterService {
 
     private fun String?.toList(): List<String> {
         return this?.trim()
-                ?.split(",")
+                ?.split(";")
                 ?.map { it.trim() }
                 ?: emptyList()
     }

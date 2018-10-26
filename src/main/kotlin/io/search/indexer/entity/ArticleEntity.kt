@@ -3,7 +3,6 @@ package io.search.indexer.entity
 import org.springframework.data.annotation.Id
 import org.springframework.data.elasticsearch.annotations.Document
 import org.springframework.data.elasticsearch.annotations.Field
-import org.springframework.data.elasticsearch.annotations.FieldType.Integer
 import org.springframework.data.elasticsearch.annotations.FieldType.Text
 
 @Document(
@@ -30,9 +29,7 @@ data class ArticleEntity(
         val place: String? = null,
 
         @Field(
-                type = Integer,
-                analyzer = "russian",
-                searchAnalyzer = "russian"
+                type = Text
         )
         val year: Int? = null,
 
