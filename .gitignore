@@ -89,3 +89,7 @@ data/
 
 ### Docker ###
 .env
+
+
+### Article test files ###
+articles/
