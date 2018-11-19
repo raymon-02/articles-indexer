@@ -85,3 +85,7 @@ gradle-app.setting
 
 ### ES ###
 data/
+
+
+### Docker ###
+.env
