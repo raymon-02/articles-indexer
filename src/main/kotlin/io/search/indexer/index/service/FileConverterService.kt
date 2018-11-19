@@ -14,44 +14,44 @@ class FileConverterService {
     //TODO: fields can be written not only in one line
     fun convertFileToDocs(path: String): List<Article> {
         return File(path).walkTopDown().asSequence()
-                .filter {
-                    it.isFile && it.extension == "index"
-                }
-                .map {
-                    it.readLines()
-                }
-                .map {
-                    it.toArticle()
-                }
-                .toList()
+            .filter {
+                it.isFile && it.extension == "index"
+            }
+            .map {
+                it.readLines()
+            }
+            .map {
+                it.toArticle()
+            }
+            .toList()
     }
 
     private fun List<String>.toArticle(): Article {
         return map { it.trim().split(":", limit = 2) }
-                .asSequence()
-                .filter {
-                    it.size == 2
-                }
-                .map {
-                    (it[0].trim() to it[1].trim()).toArticleFieldPair()
-                }
-                .filterNotNull()
-                .toMap()
-                .toArticle()
+            .asSequence()
+            .filter {
+                it.size == 2
+            }
+            .map {
+                (it[0].trim() to it[1].trim()).toArticleFieldPair()
+            }
+            .filterNotNull()
+            .toMap()
+            .toArticle()
     }
 
     private fun Map<ArticleField, String>.toArticle(): Article {
         return Article(
-                get(ID),
-                get(TITLE),
-                get(PLACE),
-                get(YEAR)?.toInt(),
-                get(MATERIAL),
-                get(CREATOR),
-                get(ADDRESS),
-                get(DESCRIPTION),
-                get(MM_NAME),
-                get(MM_TEXTS).toList()
+            get(ID),
+            get(TITLE),
+            get(PLACE),
+            get(YEAR)?.toInt(),
+            get(MATERIAL),
+            get(CREATOR),
+            get(ADDRESS),
+            get(DESCRIPTION),
+            get(MM_NAME),
+            get(MM_TEXTS).toList()
         )
     }
 
@@ -65,9 +65,9 @@ class FileConverterService {
 
     private fun String?.toList(): List<String> {
         return this?.trim()
-                ?.split(";")
-                ?.map { it.trim() }
-                ?: emptyList()
+            ?.split(";")
+            ?.map { it.trim() }
+            ?: emptyList()
     }
 }
 

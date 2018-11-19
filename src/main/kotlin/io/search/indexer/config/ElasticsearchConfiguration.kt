@@ -11,25 +11,25 @@ import java.net.InetAddress
 
 
 @Configuration
-class IndexerConfiguration(
-        @Value("\${elasticsearch.clusterName}")
-        private val esClusterName: String,
+class ElasticsearchConfiguration(
+    @Value("\${elasticsearch.clusterName}")
+    private val esClusterName: String,
 
-        @Value("\${elasticsearch.host}")
-        private val esHost: String,
+    @Value("\${elasticsearch.host}")
+    private val esHost: String,
 
-        @Value("\${elasticsearch.port}")
-        private val esPort: Int
+    @Value("\${elasticsearch.port}")
+    private val esPort: Int
 ) {
 
     @Bean
     fun client(): Client {
         val esSettings = Settings.builder()
-                .put("cluster.name", esClusterName)
-                .build()
+            .put("cluster.name", esClusterName)
+            .build()
         val transportClient = PreBuiltTransportClient(esSettings)
         transportClient.addTransportAddress(
-                InetSocketTransportAddress(InetAddress.getByName(esHost), esPort)
+            InetSocketTransportAddress(InetAddress.getByName(esHost), esPort)
         )
 
         return transportClient

@@ -11,40 +11,40 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/index")
 class IndexController(
-        val indexService: IndexService
+    val indexService: IndexService
 ) {
 
     @PostMapping("/articles")
     fun indexDocsList(
-            @RequestBody articles: List<ArticleDto>
+        @RequestBody articles: List<ArticleDto>
     ): ResponseEntity<List<ArticleIdTitleDto>> {
         val indexedArticles = indexService.indexArticles(articles.toArticleList())
-                .toArticleIdTitleDtoList()
+            .toArticleIdTitleDtoList()
         return ResponseEntity(indexedArticles, OK)
     }
 
     @PostMapping("/articles/local")
     fun indexDocsFromPath(
-            @RequestParam("path", required = true) path: String
+        @RequestParam("path", required = true) path: String
     ): ResponseEntity<List<ArticleIdTitleDto>> {
         val indexedArticles = indexService.indexArticlesFromPath(path)
-                .toArticleIdTitleDtoList()
+            .toArticleIdTitleDtoList()
         return ResponseEntity(indexedArticles, OK)
     }
 
     private fun List<ArticleDto>.toArticleList(): List<Article> {
         return map {
             Article(
-                    it.id,
-                    it.title,
-                    it.place,
-                    it.year,
-                    it.material,
-                    it.creator,
-                    it.address,
-                    it.description,
-                    it.massMediaName,
-                    it.massMediaTexts
+                it.id,
+                it.title,
+                it.place,
+                it.year,
+                it.material,
+                it.creator,
+                it.address,
+                it.description,
+                it.massMediaName,
+                it.massMediaTexts
             )
         }
     }

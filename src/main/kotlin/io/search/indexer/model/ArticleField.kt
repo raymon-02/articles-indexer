@@ -1,7 +1,7 @@
 package io.search.indexer.model
 
 enum class ArticleField(
-        val fieldName: String
+    val fieldName: String
 ) {
     ID("id"),
     TITLE("title"),

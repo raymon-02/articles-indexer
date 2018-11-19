@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/search")
 class SearchController(
-        private val searchService: SearchService
+    private val searchService: SearchService
 ) {
 
     @GetMapping
     fun search(
-            @RequestParam("q", required = true) text: String
+        @RequestParam("q", required = true) text: String
     ): List<ArticleIdTitleDto> {
         return searchService.searchByText(text)
-                .toArticleIdTitleDtoList()
+            .toArticleIdTitleDtoList()
     }
 
     private fun List<Article>.toArticleIdTitleDtoList(): List<ArticleIdTitleDto> {
