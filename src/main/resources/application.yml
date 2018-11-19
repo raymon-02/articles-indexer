@@ -1,4 +1,18 @@
+server:
+  port: 8093
+
 elasticsearch:
-  clusterName: elasticsearch_iorlov
+  clusterName: local-cluster
   host: localhost
+  port: 9300
+
+
+---
+
+spring:
+  profiles: docker
+
+elasticsearch:
+  clusterName: docker-cluster
+  host: elasticsearch
   port: 9300

@@ -1,25 +1,31 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "io.spring.gradle:dependency-management-plugin:$spring_dependency_management_version"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+        classpath "com.bmuschko:gradle-docker-plugin:$gradle_docker_plugin_version"
     }
 }
 
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
 group "io.search.base"
-version "1.0"
 
 apply plugin: "kotlin"
 apply plugin: "kotlin-spring"
 apply plugin: "io.spring.dependency-management"
 apply plugin: "org.springframework.boot"
+apply plugin: "com.bmuschko.docker-remote-api"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -41,6 +47,12 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+task buildDockerImage(type: DockerBuildImage) {
+    inputDir.set(file(projectDir))
+    tags.set([project.name])
+    dependsOn build
 }
 
 
