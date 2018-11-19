@@ -7,6 +7,7 @@ import io.search.indexer.repository.ArticleRepository
 import org.elasticsearch.index.query.MultiMatchQueryBuilder
 import org.elasticsearch.index.query.MultiMatchQueryBuilder.Type.BEST_FIELDS
 import org.elasticsearch.index.query.QueryBuilders
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 
@@ -15,48 +16,49 @@ import org.springframework.stereotype.Service
 
 @Service
 class SearchService(
-        private val articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository
 ) {
+    val log = LoggerFactory.getLogger(SearchService::class.java)
 
     fun searchByText(text: String): List<Article> {
-
+        log.info("Searching by text: '$text'")
         val queryBuilder = multiMatchQueryAllFields(text)
-                .minimumShouldMatch("50%")
-                .type(BEST_FIELDS)
+            .minimumShouldMatch("50%")
+            .type(BEST_FIELDS)
 
 
         return articleRepository.search(queryBuilder)
-                .map { it.toArticle() }
-                .toList()
+            .map { it.toArticle() }
+            .toList()
     }
 
     private fun ArticleEntity.toArticle(): Article {
         return Article(
-                id,
-                title,
-                place,
-                year,
-                material,
-                creator,
-                address,
-                description,
-                massMediaName,
-                massMediaTexts
+            id,
+            title,
+            place,
+            year,
+            material,
+            creator,
+            address,
+            description,
+            massMediaName,
+            massMediaTexts
         )
     }
 
     private fun multiMatchQueryAllFields(text: String): MultiMatchQueryBuilder {
         return QueryBuilders.multiMatchQuery(
-                text,
-                TITLE.fieldName,
-                PLACE.fieldName,
-                YEAR.fieldName,
-                MATERIAL.fieldName,
-                CREATOR.fieldName,
-                ADDRESS.fieldName,
-                DESCRIPTION.fieldName,
-                MM_NAME.fieldName,
-                MM_TEXTS.fieldName
+            text,
+            TITLE.fieldName,
+            PLACE.fieldName,
+            YEAR.fieldName,
+            MATERIAL.fieldName,
+            CREATOR.fieldName,
+            ADDRESS.fieldName,
+            DESCRIPTION.fieldName,
+            MM_NAME.fieldName,
+            MM_TEXTS.fieldName
         )
     }
 
