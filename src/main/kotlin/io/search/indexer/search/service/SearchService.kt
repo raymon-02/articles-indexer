@@ -26,7 +26,6 @@ class SearchService(
             .minimumShouldMatch("50%")
             .type(BEST_FIELDS)
 
-
         return articleRepository.search(queryBuilder)
             .map { it.toArticle() }
             .toList()
