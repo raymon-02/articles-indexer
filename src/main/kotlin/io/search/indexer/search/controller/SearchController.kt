@@ -3,13 +3,12 @@ package io.search.indexer.search.controller
 import io.search.indexer.dto.ArticleIdTitleDto
 import io.search.indexer.model.Article
 import io.search.indexer.search.service.SearchService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 //TODO: support async calls
+
+const val TILDA = "https://tilda.cc"
 
 @RestController
 @RequestMapping("/api/search")
@@ -18,9 +17,8 @@ class SearchController(
 ) {
 
     @GetMapping
-    fun search(
-        @RequestParam("q", required = true) text: String
-    ): List<ArticleIdTitleDto> {
+    @CrossOrigin(TILDA)
+    fun search(@RequestParam("q", required = true) text: String): List<ArticleIdTitleDto> {
         return searchService.searchByText(text)
             .toArticleIdTitleDtoList()
     }
